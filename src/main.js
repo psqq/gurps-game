@@ -52,5 +52,10 @@ ui.addButton(
 Изменение здоровья защищающегося: ${oldHp} -> ${attackOptions.defender.hp}
             `.trim()
         );
+        if (attackOptions.defender.hp <= 0) {
+            ui.print('Вы попедили врага, но появился новый.');
+            game.enemy = game.master.getRandomCharacter();
+            game.enemy.name = "Враг";
+        }
     }
 );

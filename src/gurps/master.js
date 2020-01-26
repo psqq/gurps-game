@@ -10,6 +10,7 @@ export default class Master {
         c.dx = dice.throwIt(3);
         c.iq = dice.throwIt(3);
         c.ht = dice.throwIt(3);
+        c.hp = c.ht + Math.floor(c.ht * (Math.random() * 0.6 - 0.3));
         return c;
     }
     /**

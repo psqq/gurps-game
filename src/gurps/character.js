@@ -4,6 +4,7 @@ import * as dice from './dice.js';
 export default class Character {
     constructor() {
         this.name = "Character";
+        this.player = false;
         this.st = 10;
         this.dx = 10;
         this.iq = 10;
