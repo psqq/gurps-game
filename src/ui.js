@@ -8,7 +8,7 @@ function scrollToBottom(el) {
 
 function _printEl(el) {
     outputEl.append(el);
-    scrollToBottom(el);
+    scrollToBottom(outputEl);
 }
 
 export function printHtml(msg) {

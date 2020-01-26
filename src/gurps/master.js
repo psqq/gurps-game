@@ -1,21 +1,32 @@
 import * as gurps from './index.js';
+import * as dice from './dice.js';
 
 export default class Master {
     constructor() {
     }
     getRandomCharacter() {
         const c = new gurps.Character();
-        c.st = this.throwDice(3);
-        c.dx = this.throwDice(3);
-        c.iq = this.throwDice(3);
-        c.ht = this.throwDice(3);
+        c.st = dice.throwIt(3);
+        c.dx = dice.throwIt(3);
+        c.iq = dice.throwIt(3);
+        c.ht = dice.throwIt(3);
         return c;
     }
-    throwDice(n) {
-        let result = 0;
-        for (let i = 0; i < n; i++) {
-            result += Math.floor(6 * Math.random()) + 1;
-        }
-        return result;
+    /**
+     * The Master performs the necessary attack actions. 
+     * @param {Object} o options
+     * @param {gurps.Character} o.attacker
+     * @param {gurps.Character} o.defender 
+     * @param {"thrust" | "swing"} o.attackType 
+     */
+    attack(o) {
+        let dmg = o.attacker.getDamage()[o.attackType];
+        dmg = Math.max(0, dmg);
+        const oldHp = o.defender.hp;
+        o.defender.hp -= dmg;
+        return {
+            defenderHpBeforAttack: oldHp,
+            damage: dmg,
+        };
     }
 }
