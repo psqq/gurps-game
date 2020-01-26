@@ -10,6 +10,7 @@ export default class Character {
         this.iq = 10;
         this.ht = 10;
         this.hp = 10;
+        this.maxHp = 10;
     }
     getThrustDamage() {
         let dmg = tables.damage[this.st][1];

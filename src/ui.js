@@ -2,6 +2,8 @@
 const outputEl = document.querySelector('.output');
 const controlsEl = document.querySelector('.controls');
 
+let buttonsStateMachine = null;
+
 function scrollToBottom(el) {
     el.scrollTop = el.scrollHeight;
 }
@@ -30,6 +32,34 @@ export function addButton(name, cb) {
     controlsEl.append(btnEl);
 }
 
-export function clearControls(name, cb) {
+function showCurrentStateButtons() {
+    clearControls();
+    const buttons = buttonsStateMachine.buttonsByState[buttonsStateMachine.state];
+    for(let btn of buttons) {
+        addButton(btn.name, () => {
+            const oldState = buttonsStateMachine.state;
+            btn.onClick();
+            if (oldState != buttonsStateMachine.state) {
+                showCurrentStateButtons();
+            }
+        });
+    }
+}
+
+/**
+ * @param {Object} buttonsStateMachine 
+ * @param {string} buttonsStateMachine.state
+ * @param {{[key: string]: { name: string, cb: (...args) => any}}} buttonsStateMachine.buttonsByState
+ */
+export function setButtonsStateMachine(_buttonsStateMachine) {
+    buttonsStateMachine = _buttonsStateMachine;
+    showCurrentStateButtons();
+}
+
+export function clearControls() {
     controlsEl.innerHTML = "";
+}
+
+export function clearOutput() {
+    outputEl.innerHTML = "";
 }
