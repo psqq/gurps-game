@@ -5,6 +5,7 @@ export default class Character {
     constructor() {
         this.name = "Character";
         this.player = false;
+        this.score = 100;
         this.st = 10;
         this.dx = 10;
         this.iq = 10;

@@ -8,5 +8,7 @@ export default class Game {
         this.player.player = true;
         this.enemy = this.master.getRandomCharacter();
         this.enemy.name = "Враг";
+        this.world = new gurps.World();
+        this.world.setTechnologicalLevel(3);
     }
 }
